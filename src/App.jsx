@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { signup, signin } from './Api';
 
 function App() {
 
@@ -28,25 +29,20 @@ function App() {
     group: group
   }
 
+
   const addNewUser = async (newUser) => {
-    console.log(newUser)
     try {
-      const res = await fetch('https://api.react-learning.ru/signup', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser)
-      });
+      const res = await signup(newUser);
 
+      if (res == true) {
+        const valuesSignIn = {
+          email: newUser.email,
+          password: newUser.password
+        }
 
-      if (res.ok) {
-        await res.json();
+        await signin(valuesSignIn)
+
         clickToMain()
-      } else {
-        const response = await res.json();
-        alert("Ошибка HTTP: " + res.status + '; ' + response.message);
       }
 
     } catch (err) {

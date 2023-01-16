@@ -63,3 +63,44 @@ export const getProducts = async () => {
     let positions = await response.json();
     return positions.products;
 }
+
+export const signup = async (newUser) => {
+    const res = await fetch('https://api.react-learning.ru/signup', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+    });
+
+    if (res.ok) {
+        return true;
+    } else {
+        const response = await res.json();
+        alert("Ошибка HTTP: " + res.status + '; ' + response.message);
+        return false;
+    }
+}
+
+export const signin = async (valuesSignIn) => {
+    const res = await fetch('https://api.react-learning.ru/signin', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(valuesSignIn)
+    })
+
+    if (res.ok) {
+        const responce = await res.json();
+        localStorage.setItem('token', responce.token);
+
+        return true;
+    } else {
+        alert("Ошибка HTTP: " + res.status);
+        return false;
+    }
+
+}

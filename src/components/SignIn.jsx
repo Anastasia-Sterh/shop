@@ -3,8 +3,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
-
+import { signin } from '../Api';
 
 
 export function SignIn() {
@@ -23,33 +22,15 @@ export function SignIn() {
     }
 
     const onSingInClick = async () => {
-        console.log(valuesSignIn);
         try {
-            const res = await fetch('https://api.react-learning.ru/signin', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(valuesSignIn)
-            })
+            const res = await signin(valuesSignIn);
 
-            if (res.ok) {
-                const responce = await res.json();
-                localStorage.setItem('token', responce.token);
+            if (res == true) {
                 clickToMain()
-            } else {
-                alert("Ошибка HTTP: " + res.status);
             }
-
-
-
         } catch (error) {
             alert(error.message)
-
         }
-
-        //
     }
 
 
