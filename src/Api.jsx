@@ -104,3 +104,29 @@ export const signin = async (valuesSignIn) => {
     }
 
 }
+
+
+export const isUserAuth = async () => {
+    if (localStorage.getItem('token') == undefined) {
+        return false;
+    }
+
+    try {
+        let response = await fetch('https://api.react-learning.ru/v2/9-gr/users/me', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        });
+
+        if (response.ok == false) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        return false;
+    }
+}

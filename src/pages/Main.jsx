@@ -1,8 +1,11 @@
 
 import { useState, useEffect } from "react";
 import { ProductCard } from "../components/ProductCard";
-import { Header } from "../components/Header";
+
 import { getProducts } from "../Api";
+
+import { CircularProgress } from "@mui/material";
+
 
 export function Main() {
 
@@ -17,16 +20,29 @@ export function Main() {
             .catch(err => alert(err))
     }, [])
 
+    if (products.length == 0) {
+
+        return (
+            <>
+
+                <CircularProgress color="secondary" className="loader" />
+
+            </>
+        )
+
+    }
+
     let allCards = [];
     for (const product of products) {
-        allCards.push(<ProductCard key={product.id} product={product} />)
+        allCards.push(<ProductCard key={product._id} product={product} />)
     }
     return (
         <>
-            <Header />
+
             <div className="main">
                 {allCards}
             </div>
+
         </>
     )
 }

@@ -2,14 +2,16 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { signin } from '../Api';
+import { FirstContext } from '../App';
 
 
 export function SignIn() {
 
     const [email, SetEmail] = useState('');
     const [password, SetPassword] = useState('');
+    const { setIsAuth } = useContext(FirstContext)
 
     const navigate = useNavigate();
     const clickToMain = () => {
@@ -26,6 +28,7 @@ export function SignIn() {
             const res = await signin(valuesSignIn);
 
             if (res == true) {
+                setIsAuth(true)
                 clickToMain()
             }
         } catch (error) {

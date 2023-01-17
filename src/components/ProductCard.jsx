@@ -23,20 +23,22 @@ export function ProductCard({ product }) {
                     {product.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {product.wight}
-                    <p>{product.price} ₽</p>
-                    <div className='chipInCard'> {product.tags.map((tag) => <Chip
-                        size="small"
+                    {product.wight} <br />
+                    {product.price} ₽
 
-                        label={tag}
-                        style={{ marginLeft: '3px' }}
-                        color="secondary"
-                    />)}</div>
                 </Typography>
+                <div className='chipInCard'> {product.tags.map((tag) => <Chip
+                    key={tag}
+                    size="small"
+
+                    label={tag}
+                    style={{ marginLeft: '3px' }}
+                    color="secondary"
+                />)}</div>
             </CardContent>
             <CardActions className='buttonsInCards'>
-                <Button size="small">В корзину</Button>
-                <Button size="small">Узнать больше</Button>
+                <Button size="small" variant="contained">В корзину</Button>
+                <Button size="small" variant="contained">Узнать больше</Button>
             </CardActions>
         </Card>
 

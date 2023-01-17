@@ -9,26 +9,32 @@ import {
 import { SignIn } from './components/SignIn';
 import { Main } from './pages/Main';
 import { AboutMe } from './pages/AboutMe';
+import { SignUp } from './components/SignUp';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: '',
+        element: <SignUp />
+      },
+      {
+        path: 'signIn',
+        element: <SignIn />
+      },
 
-  },
-  {
-    path: 'signIn',
-    element: <SignIn />
-  },
+      {
+        path: 'main',
+        element: <Main />
+      },
 
-  {
-    path: 'main',
-    element: <Main />
-  },
-
-  {
-    path: 'aboutMe',
-    element: <AboutMe />
+      {
+        path: 'aboutMe',
+        element: <AboutMe />
+      }
+    ]
   }
 ]);
 
