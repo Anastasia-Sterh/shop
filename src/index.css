@@ -101,6 +101,9 @@ body {
 
 .card {
   position: relative;
+  transition: transform 225ms ease !important;
+  /*плавное изменение любого свойства карточки */
+  cursor: pointer;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -110,6 +113,18 @@ body {
     0px 2px 1px -1px rgb(0 0 0 / 40%),
     0px 1px 1px 0px rgb(0 0 0 / 28%),
     0px 1px 3px 0px rgb(0 0 0 / 24%) !important;
+}
+
+.card:hover {
+  transform: scale(105%);
+
+}
+
+.priceInCard {
+  font-weight: 600;
+  color: black;
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 .card img {
@@ -128,6 +143,13 @@ body {
 .buttonsInCards {
   margin-top: auto;
   margin-bottom: 10px;
+
+}
+
+.likesInCard {
+  color: red;
+  margin-left: 10px;
+
 }
 
 .card .CardMedia {
@@ -190,4 +212,57 @@ body {
   justify-content: center;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.pageOfProduct {
+  display: flex;
+  min-height: 100vh;
+  justify-content: space-evenly;
+  margin-top: 150px;
+
+}
+
+.infoAboutProduct {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+
+
+}
+
+.imageInPageOfProduct {
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.imageInPageOfProduct img {
+  height: 400px;
+  width: 400px;
+}
+
+.infoAboutAuthorInPageOfProduct {
+  display: flex;
+  flex-direction: column;
+  margin-top: 37px;
+
+
+
+}
+
+.infoAboutAuthorInPageOfProduct img {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  margin-bottom: 7px;
+  border: 1px solid rgb(204, 203, 203);
+
+
+}
+
+.oneReview img {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  border: 1px solid rgb(204, 203, 203);
 }

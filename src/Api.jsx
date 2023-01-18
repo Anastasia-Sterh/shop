@@ -130,3 +130,41 @@ export const isUserAuth = async () => {
         return false;
     }
 }
+
+export const getOneProduct = async (productID) => {
+    try {
+        let response = await fetch(`https://api.react-learning.ru/products/${productID}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                }
+            });
+        let product = await response.json();
+        return product;
+    } catch (error) {
+        alert(error.message)
+    }
+}
+
+export const getReviewsOneProduct = async (productID) => {
+    try {
+        let response = await fetch(`https://api.react-learning.ru/products/review/${productID}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                }
+            });
+        let review = await response.json();
+        console.log(review)
+        return review;
+    } catch (error) {
+        alert(error.message)
+    }
+}
+

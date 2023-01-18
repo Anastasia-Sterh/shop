@@ -10,6 +10,7 @@ import { SignIn } from './components/SignIn';
 import { Main } from './pages/Main';
 import { AboutMe } from './pages/AboutMe';
 import { SignUp } from './components/SignUp';
+import { PageOfProduct } from './pages/PageOfProduct';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
       {
         path: 'aboutMe',
         element: <AboutMe />
+      },
+
+      {
+        path: 'pageOfProduct/:productId',
+        element: <PageOfProduct />
       }
     ]
   }
