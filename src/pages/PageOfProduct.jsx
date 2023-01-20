@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { CircularProgress, Paper } from "@mui/material";
 import { getReviewsOneProduct } from "../Api";
 import { formatDate } from "../utils";
+import { StarsRating } from "../components/StarsRating";
 
 export function PageOfProduct() {
 
@@ -46,11 +47,19 @@ export function PageOfProduct() {
             <div className="reviewInPageOfProduct" >
                 {review.map(oneReview =>
                     <div className="oneReview" key={oneReview._id}>
-                        <img src={oneReview.author.avatar} alt='Avatar' />
-                        {oneReview.author.name}
-                        {formatDate(oneReview.created_at)}
-                        {oneReview.rating} <br />
-                        {oneReview.text}
+                        <div className="top_oneReview">
+                            <div className="right_oneReview">
+                                <img src={oneReview.author.avatar} alt='Avatar' />
+                                {oneReview.author.name}
+                            </div>
+                            <div className="left_oneReview">
+                                <div className="date"> {formatDate(oneReview.created_at)} </div>
+                                <StarsRating rate={oneReview.rating} /> <br />
+                            </div>
+                        </div>
+                        <div className="bottom_oneReview">
+                            {oneReview.text}
+                        </div>
                     </div>
                 )}
 
