@@ -5,7 +5,7 @@ export function StarsRating({ rate }) {
     let goldStars = []
     const getGoldStars = () => {
         for (let i = 0; i < rate; i++) {
-            goldStars.push(<StarIcon style={{ color: 'yellow' }} />)
+            goldStars.push(<StarIcon key={i} style={{ color: 'yellow' }} />)
         }
         return goldStars
     }
@@ -14,7 +14,7 @@ export function StarsRating({ rate }) {
 
     const getGrayStars = (goldStars) => {
         for (let i = goldStars.length; i < 5; i++) {
-            grayStars.push(<StarIcon style={{ color: 'gray' }} />)
+            grayStars.push(<StarIcon key={i} style={{ color: 'gray' }} />)
         }
         return grayStars
     }

@@ -15,6 +15,7 @@ export function SignUp() {
     const { setIsAuth } = useContext(FirstContext)
 
     const clickToMain = () => {
+        console.log('ctm signup')
         return navigate('/main')
     }
 

@@ -24,17 +24,17 @@ export function Header() {
 
 
     return (
-        <div className="header">
+        <div className="header" >
 
-            <div className="left">
-                <div className='headerIcons' onClick={() => { navigate('/main') }}>
+            <div className="left" onClick={() => { navigate('/main') }}>
+                <div className='headerIcons' >
                     <PetsIcon />
                 </div>
-                <span>Магазин с конечностями</span>
+                <span style={{ cursor: 'pointer' }}>Магазин с конечностями</span>
 
             </div>
             <div className="search">
-                <input name="search" label="Что вы ищете?" type='search' className="searchInput" />
+                <input name="search" label="Что вы ищете?" type='text' className="searchInput" />
                 <SearchIcon className="loopa" />
                 {/* <Button variant="contained" color="secondary" className="buttonSearch">Найти</Button> */}
             </div>
@@ -49,7 +49,7 @@ export function Header() {
                     <span>Каталог</span>
                 </div>
 
-                <div className='headerIcons' onClick={() => { navigate('/aboutMe') }}>
+                <div className='headerIcons' onClick={() => { console.log('testset'); navigate('/aboutMe') }}>
                     <AccountCircleIcon />
                     <span>Профиль</span>
                 </div>

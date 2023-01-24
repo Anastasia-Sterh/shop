@@ -15,6 +15,7 @@ export function SignIn() {
 
     const navigate = useNavigate();
     const clickToMain = () => {
+        console.log('ctm signin')
         return navigate('/main')
     }
 

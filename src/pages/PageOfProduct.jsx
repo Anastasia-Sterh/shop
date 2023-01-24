@@ -48,11 +48,11 @@ export function PageOfProduct() {
                 {review.map(oneReview =>
                     <div className="oneReview" key={oneReview._id}>
                         <div className="top_oneReview">
-                            <div className="right_oneReview">
+                            <div className="left_or_right_oneReview">
                                 <img src={oneReview.author.avatar} alt='Avatar' />
                                 {oneReview.author.name}
                             </div>
-                            <div className="left_oneReview">
+                            <div className="left_or_right_oneReview">
                                 <div className="date"> {formatDate(oneReview.created_at)} </div>
                                 <StarsRating rate={oneReview.rating} /> <br />
                             </div>

@@ -1,0 +1,172 @@
+$footer-blue: rgb(26 114 216);
+$default-font: 'Raleway', sans-serif;
+
+@mixin flex-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin abs-with-size($size) {
+    position: absolute;
+    height: $size;
+    width: $size;
+}
+
+
+body {
+    margin: 0;
+    font-family: $default-font;
+}
+
+.App {
+    @include abs-with-size(100%);
+}
+
+
+.footer {
+    width: 100%;
+    background-color: $footer-blue;
+    height: 10vh;
+    color: white;
+
+    @include flex-center();
+}
+
+
+.pageOfProduct {
+    display: flex;
+    min-height: 100vh;
+    justify-content: space-evenly;
+    margin-top: 150px;
+
+    .infoAboutProduct {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+    }
+
+    .imageInPageOfProduct {
+        max-height: 500px;
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 400px;
+            width: 400px;
+        }
+    }
+
+    .infoAboutAuthorInPageOfProduct {
+        display: flex;
+        flex-direction: column;
+        margin-top: 37px;
+
+        img {
+            height: 100px;
+            width: 100px;
+            border-radius: 100%;
+            margin-bottom: 7px;
+            border: 1px solid rgb(204, 203, 203);
+        }
+    }
+}
+
+// .about-me {
+
+//     &__user { // .about-me__user
+
+//         &-picture {} // .about-me__user-picture
+
+//         &-info {} // .about-me__user-info
+//     }
+
+//     &__add {
+//         border-radius: 5px;
+//     }
+// }
+
+
+.about-me__add {
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+    width: 250px;
+    height: 200px;
+    background: rgba(195, 193, 193, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+
+    &:hover {
+        background: rgba(195, 193, 193, 0.4);
+    }
+}
+
+.allScreen {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    z-index: 1;
+    overflow: auto;
+    padding: 50px 0;
+    box-sizing: border-box;
+}
+
+.addProduct__container {
+    font-family: 'Raleway', sans-serif;
+    max-width: 500px;
+    position: relative;
+    margin: auto;
+    z-index: 0;
+
+    .icon {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        color: grey;
+        cursor: pointer;
+    }
+
+    .form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .input {
+        margin: 5px;
+        width: 70%;
+    }
+
+    .btn {
+        margin-top: 5px;
+        margin-bottom: 30px;
+        width: 70%;
+    }
+
+
+}
+
+
+
+/* БЭМ
+
+<div class="product-page">
+    <div class="product-page__image">
+        <img />
+    </div>
+    <div class="product-page__info">
+        <p class="product-page__info-paragraph"></p>
+        <p class="product-page__info-paragraph product-page__info-paragraph--yellow"></p>
+        <p class="product-page__info-paragraph product-page__info-paragraph--yellow"></p>
+        <p class="product-page__info-paragraph"></p>
+        <p class="product-page__info-paragraph"></p>
+    </div>
+    <div class="product-page__author"></div>
+</div>
+
+*/

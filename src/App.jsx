@@ -14,7 +14,6 @@ function App() {
   const [isAuth, setIsAuth] = useState();
   const loc = useLocation();
 
-  console.log('APP', isAuth, loc.pathname)
 
   useEffect(() => {
     isUserAuth().then(isTokenCorrect => {
@@ -26,6 +25,7 @@ function App() {
 
   if (isAuth === false) {
     if (loc.pathname != '/' && loc.pathname != '/signIn') {
+      console.log('Nav to main')
       return <Navigate to="/" />
     } else {
       return (
@@ -42,6 +42,7 @@ function App() {
 
   if (isAuth === true) {
     if (loc.pathname == '/' || loc.pathname == '/signIn') {
+      console.log('Nav to main')
       return <Navigate to="/main" />
     }
   }

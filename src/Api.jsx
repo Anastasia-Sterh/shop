@@ -42,7 +42,6 @@ export const getMe = async () => {
                 }
             });
         let user = await response.json();
-        console.log(user)
         return user;
     } catch (error) {
         alert(error.message)
@@ -163,6 +162,26 @@ export const getReviewsOneProduct = async (productID) => {
         let review = await response.json();
         console.log(review)
         return review;
+    } catch (error) {
+        alert(error.message)
+    }
+}
+
+export const addProduct = async (product) => {
+
+    try {
+        await fetch('https://api.react-learning.ru/products',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                },
+                body: JSON.stringify(product)
+            });
+        // let product = await response.json();
+        return product;
     } catch (error) {
         alert(error.message)
     }

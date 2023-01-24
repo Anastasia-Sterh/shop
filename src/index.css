@@ -1,26 +1,3 @@
-body {
-  margin: 0;
-  font-family: 'Raleway', sans-serif;
-
-}
-
-.App {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-.footer {
-  width: 100%;
-  background-color: rgb(26 114 216);
-  height: 10vh;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
 .header {
   width: 100%;
   background-color: rgb(26 114 216);
@@ -55,6 +32,7 @@ body {
   color: white;
   font-weight: 500;
   outline: none;
+  box-sizing: border-box;
 }
 
 .loopa {
@@ -188,6 +166,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 100px;
 }
 
 .userWindowAvatar {
@@ -205,60 +184,14 @@ body {
 }
 
 
-.userWindow {
+/* .userWindow {
   height: auto;
   width: auto;
   display: flex;
   justify-content: center;
   margin-top: auto;
   margin-bottom: auto;
-}
-
-.pageOfProduct {
-  display: flex;
-  min-height: 100vh;
-  justify-content: space-evenly;
-  margin-top: 150px;
-
-}
-
-.infoAboutProduct {
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-
-
-}
-
-.imageInPageOfProduct {
-  max-height: 500px;
-  display: flex;
-  align-items: center;
-}
-
-.imageInPageOfProduct img {
-  height: 400px;
-  width: 400px;
-}
-
-.infoAboutAuthorInPageOfProduct {
-  display: flex;
-  flex-direction: column;
-  margin-top: 37px;
-
-
-
-}
-
-.infoAboutAuthorInPageOfProduct img {
-  height: 100px;
-  width: 100px;
-  border-radius: 100%;
-  margin-bottom: 7px;
-  border: 1px solid rgb(204, 203, 203);
-
-
-}
+} */
 
 .oneReview {
   width: 100%;
@@ -274,14 +207,7 @@ body {
 
 }
 
-.right_oneReview {
-  display: flex;
-  align-items: center;
-  margin-left: 15px;
-
-}
-
-.left_oneReview {
+.left_or_right_oneReview {
   display: flex;
   align-items: center;
   margin-right: 15px;
