@@ -6,9 +6,10 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PetsIcon from '@mui/icons-material/Pets';
 import LogoutIcon from '@mui/icons-material/Logout';
-// import Button from '@mui/material/Button';
-// import TextField from '@mui/material/TextField';
+// import { useWindowWidth } from "../utils";
 import SearchIcon from '@mui/icons-material/Search';
+
+
 export function Header() {
 
     const { setIsAuth } = useContext(FirstContext)
@@ -22,6 +23,13 @@ export function Header() {
 
     const navigate = useNavigate();
 
+    // if (useWindowWidth() <= 375) {
+    //     return (
+    //         <div className="header" >
+
+    //         </div>
+    //     )
+    // } else
 
     return (
         <div className="header" >

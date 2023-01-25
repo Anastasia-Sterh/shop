@@ -29,7 +29,8 @@ body {
     background-color: $footer-blue;
     height: 10vh;
     color: white;
-
+    // position: fixed;
+    // bottom: 0;
     @include flex-center();
 }
 
@@ -149,6 +150,50 @@ body {
     }
 
 
+}
+
+@media (max-width: 768px) {
+    .pageOfProduct {
+        display: flex;
+        min-height: 100vh;
+        justify-content: space-evenly;
+        flex-direction: column;
+        margin-top: 80px;
+        margin-left: 82px;
+        margin-right: 82px;
+
+
+        .imageInPageOfProduct {
+            max-height: 300px;
+            display: flex;
+            align-items: center;
+
+            img {
+                height: 200px;
+                width: 200px;
+                margin: auto;
+            }
+        }
+    }
+
+    .infoAboutProduct {
+        // align-items: center;
+
+        h1 {
+            font-size: medium;
+        }
+
+
+    }
+
+    .infoAboutAuthorInPageOfProduct {
+        align-items: center;
+    }
+
+    .oneReview {
+        font-size: small;
+
+    }
 }
 
 

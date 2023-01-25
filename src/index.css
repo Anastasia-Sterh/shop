@@ -148,6 +148,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  z-index: 2;
 
 }
 
@@ -182,16 +183,6 @@
   display: flex;
   flex-direction: column;
 }
-
-
-/* .userWindow {
-  height: auto;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-  margin-bottom: auto;
-} */
 
 .oneReview {
   width: 100%;
@@ -232,4 +223,38 @@
 
 .date {
   margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* gap: 30px; */
+    padding-bottom: 90px;
+    justify-content: center;
+
+  }
+
+  .card {
+    margin: 0 auto;
+  }
+
+  .header {
+    align-items: center;
+  }
+
+  .header .left {
+    display: none;
+  }
+
+  .header span {
+    display: none;
+  }
+
+  .paper {
+    width: 300px;
+    height: 500px;
+    top: 200px;
+  }
 }
