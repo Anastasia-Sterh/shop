@@ -8,20 +8,16 @@ import Chip from '@mui/material/Chip';
 import { useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-
-
 export function ProductCard({ product }) {
-
     const navigate = useNavigate()
 
     return (
 
-        <Card className='card' sx={{ maxWidth: 345 }} onClick={() => { navigate(`/pageOfProduct/${product._id}`) }}>
-            <CardMedia className='CardMedia'
+        <Card className='card' sx={{ maxWidth: 345 }} onClick={() => { navigate(`/product/${product._id}`) }}>
+            <CardMedia className='card__media'
                 sx={{ height: 200 }}
                 image={product.pictures}
                 title={product.name}
-
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -29,27 +25,22 @@ export function ProductCard({ product }) {
                 </Typography>
                 <Typography variant="body2" color="text.secondary" component="div">
                     {product.wight} <br />
-                    <div className='priceInCard'> {product.price} ₽ </div>
-
+                    <div className='card__price'> {product.price} ₽ </div>
                 </Typography>
-                <div className='chipInCard'>
+                <div className='card__chip'>
                     {product.tags.map((tag) => <Chip
                         key={tag}
                         size="small"
-
                         label={tag}
                         style={{ marginLeft: '3px' }}
                         color="secondary"
                     />)}
                 </div>
             </CardContent>
-            <CardActions className='buttonsInCards'>
+            <CardActions className='card__buttons'>
                 <Button size="small" variant="contained" onClick={(e) => { e.stopPropagation(); }}>В корзину</Button>
-                <FavoriteIcon className='likesInCard' onClick={(e) => { e.stopPropagation(); }} /> {product.likes.length}
-
-
+                <FavoriteIcon className='card__likes' onClick={(e) => { e.stopPropagation(); }} /> {product.likes.length}
             </CardActions>
         </Card>
-
     )
 }

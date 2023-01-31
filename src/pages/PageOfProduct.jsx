@@ -1,37 +1,54 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getOneProduct } from "../Api";
-import { useEffect } from "react";
+import { getOneProduct } from "../api";
 import { CircularProgress, Paper } from "@mui/material";
-import { getReviewsOneProduct } from "../Api";
+import { getReviewsOneProduct } from "../api";
 import { formatDate } from "../utils";
 import { StarsRating } from "../components/StarsRating";
+import { useQuery } from "@tanstack/react-query";
 
 export function PageOfProduct() {
 
-    const [oneProduct, setOneProduct] = useState();
-    const [review, setReview] = useState();
-
     let { productId } = useParams();
 
-    useEffect(() => {
-        getOneProduct(productId).then((oneProduct) => setOneProduct(oneProduct)).catch(err => alert(err))
+    const {
+        data: oneProduct,
+        isLoading: isLoadingProduct,
+        isError: isErrorProduct,
+        error: errorProduct,
+    } = useQuery({
+        queryKey: ['getOneProduct'],
+        queryFn: () => getOneProduct(productId)
+    });
 
-        getReviewsOneProduct(productId).then((review) => setReview(review)).catch(err => alert(err))
-    }, [])
+    const {
+        data: review,
+        isLoading: isLoadingReviews,
+        isError: isErrorReviews,
+        error: errorReviews,
+    } = useQuery({
+        queryKey: ['getReviews'],
+        queryFn: () => getReviewsOneProduct(productId)
+    })
 
-    if (oneProduct == undefined || review == undefined) {
-
+    if (isLoadingReviews || isLoadingProduct) {
         return <CircularProgress color="secondary" className="loader" />
+    }
+
+    if (isErrorReviews) {
+        return <p>Error happened: {errorReviews.message}</p>
+    }
+
+    if (isErrorProduct) {
+        return <p>Error happened: {errorProduct.message}</p>
     }
 
     return (
         <>
             <div className="pageOfProduct">
-                <Paper elevation={3} className="imageInPageOfProduct">
+                <Paper elevation={3} className="pageOfProduct__image">
                     <img src={oneProduct.pictures} alt={oneProduct.name} />
                 </Paper>
-                <div className="infoAboutProduct">
+                <div className="pageOfProduct__infoAboutProduct">
 
                     <h1>{oneProduct.name}</h1>
                     <h3>{oneProduct.price} ₽</h3>
@@ -39,25 +56,25 @@ export function PageOfProduct() {
                     <p>{oneProduct.description}</p>
                 </div>
 
-                <div className="infoAboutAuthorInPageOfProduct">
+                <div className="pageOfProduct__infoAboutAuthor">
                     <img src={oneProduct.author.avatar} alt='Avatar' />
                     {oneProduct.author.name}
                 </div>
             </div>
-            <div className="reviewInPageOfProduct" >
+            <div className="pageOfProduct__reviews" >
                 {review.map(oneReview =>
-                    <div className="oneReview" key={oneReview._id}>
-                        <div className="top_oneReview">
-                            <div className="left_or_right_oneReview">
+                    <div className="pageOfProduct__reviews-oneReview" key={oneReview._id}>
+                        <div className="pageOfProduct__reviews-oneReview-top">
+                            <div className="pageOfProduct__reviews-oneReview-leftOrRight">
                                 <img src={oneReview.author.avatar} alt='Avatar' />
                                 {oneReview.author.name}
                             </div>
-                            <div className="left_or_right_oneReview">
+                            <div className="pageOfProduct__reviews-oneReview-leftOrRight">
                                 <div className="date"> {formatDate(oneReview.created_at)} </div>
                                 <StarsRating rate={oneReview.rating} /> <br />
                             </div>
                         </div>
-                        <div className="bottom_oneReview">
+                        <div className="pageOfProduct__reviews-oneReview-bottom">
                             {oneReview.text}
                         </div>
                     </div>

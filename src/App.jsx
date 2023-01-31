@@ -1,32 +1,35 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import { isUserAuth } from "./Api";
+import { isUserAuth } from "./api";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { CircularProgress } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 
 export const FirstContext = React.createContext({});
 
 function App() {
 
-  const [isAuth, setIsAuth] = useState();
-  const loc = useLocation();
 
+  const location = useLocation();
+  const userHere = location.pathname == '/signup' || location.pathname == '/signin';
 
-  useEffect(() => {
-    isUserAuth().then(isTokenCorrect => {
-      setIsAuth(isTokenCorrect);
-    })
+  const { data: isAuth, isLoading, refetch: refetchAuth } = useQuery({
+    queryKey: ['isUserAuth'],
+    queryFn: () => isUserAuth()
   })
 
-  const valueForContext = { isAuth, setIsAuth }
+
+  if (isLoading) {
+    return <CircularProgress color="secondary" className="loader" />
+  }
+
+  const valueForContext = { refetchAuth }
 
   if (isAuth === false) {
-    if (loc.pathname != '/' && loc.pathname != '/signIn') {
-      console.log('Nav to main')
-      return <Navigate to="/" />
+    if (!userHere) {
+      return <Navigate to="/signup" />
     } else {
       return (
         <FirstContext.Provider value={valueForContext}>
@@ -36,13 +39,9 @@ function App() {
     }
   }
 
-  if (isAuth === undefined) {
-    return <CircularProgress color="secondary" className="loader" />
-  }
-
   if (isAuth === true) {
-    if (loc.pathname == '/' || loc.pathname == '/signIn') {
-      console.log('Nav to main')
+    if (location.pathname == '/' || userHere) {
+
       return <Navigate to="/main" />
     }
   }

@@ -6,64 +6,59 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PetsIcon from '@mui/icons-material/Pets';
 import LogoutIcon from '@mui/icons-material/Logout';
-// import { useWindowWidth } from "../utils";
 import SearchIcon from '@mui/icons-material/Search';
+import { Link, NavLink } from 'react-router-dom';
 
 
 export function Header() {
 
-    const { setIsAuth } = useContext(FirstContext)
+    const { refetchAuth } = useContext(FirstContext)
 
     function clearToken() {
         localStorage.removeItem('token');
-        setIsAuth(false)
-        navigate('/');
-        console.log('meow')
+        refetchAuth()
+        navigate('/signin');
+
     }
 
     const navigate = useNavigate();
 
-    // if (useWindowWidth() <= 375) {
-    //     return (
-    //         <div className="header" >
-
-    //         </div>
-    //     )
-    // } else
-
     return (
         <div className="header" >
-
-            <div className="left" onClick={() => { navigate('/main') }}>
-                <div className='headerIcons' >
+            <Link to="/main" className="header__left">
+                <div className='header_icons' >
                     <PetsIcon />
                 </div>
                 <span style={{ cursor: 'pointer' }}>Магазин с конечностями</span>
 
+            </Link>
+            <div className="header__search search">
+                <input name="search" label="Что вы ищете?" type='text' className="search__input" />
+                <SearchIcon className="search__input-icon" />
+
             </div>
-            <div className="search">
-                <input name="search" label="Что вы ищете?" type='text' className="searchInput" />
-                <SearchIcon className="loopa" />
-                {/* <Button variant="contained" color="secondary" className="buttonSearch">Найти</Button> */}
-            </div>
-            <div className="right">
-                <div className='headerIcons' onClick={() => { navigate('/aboutMe') }}>
+            <div className="header__right">
+                <NavLink
+                    to="" className='header__icons'>
                     <ShoppingCartIcon />
                     <span>Корзина</span>
-                </div>
+                </NavLink>
 
-                <div className='headerIcons' onClick={() => { navigate('/main') }}>
+                <NavLink
+                    to="/main" className='header__icons'>
                     <MenuBookIcon />
                     <span>Каталог</span>
-                </div>
 
-                <div className='headerIcons' onClick={() => { console.log('testset'); navigate('/aboutMe') }}>
+                </NavLink>
+                <NavLink
+                    to="/aboutme" className='header__icons' >
                     <AccountCircleIcon />
                     <span>Профиль</span>
-                </div>
+
+                </NavLink>
 
 
-                <div className='headerIcons' onClick={() => { clearToken() }}>
+                <div className='header__icons' onClick={() => { clearToken() }}>
                     <LogoutIcon />
                     <span>Выйти</span>
                 </div>

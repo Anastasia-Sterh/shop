@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import './index.css';
-
 import App from './App';
 import {
   createBrowserRouter,
@@ -13,6 +11,10 @@ import { Main } from './pages/Main';
 import { AboutMe } from './pages/AboutMe';
 import { SignUp } from './components/SignUp';
 import { PageOfProduct } from './pages/PageOfProduct';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NotFound } from './pages/NotFound';
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -20,38 +22,44 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '',
+        path: '/signup',
         element: <SignUp />
       },
+
       {
-        path: 'signIn',
+        path: '/signin',
         element: <SignIn />
       },
 
       {
-        path: 'main',
+        path: '/main',
         element: <Main />
       },
 
       {
-        path: 'aboutMe',
+        path: '/aboutme',
         element: <AboutMe />
       },
 
       {
-        path: 'pageOfProduct/:productId',
+        path: '/product/:productId',
         element: <PageOfProduct />
+      },
+
+      {
+        path: "*",
+        element: <NotFound />
+
       }
     ]
   }
 ]);
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
-
-

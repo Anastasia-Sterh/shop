@@ -1,51 +1,74 @@
 import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
-import { editUser, editAvatar, getMe } from '../Api';
+import { editUser } from '../api';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { useMutation } from '@tanstack/react-query';
+import { CircularProgress } from '@mui/material';
 
-export function EditUserModal({ user, setUser, setEditModalShown }) {
 
-    const [userName, setUserName] = useState(user.name)
-    const [userAbout, setUserAbout] = useState(user.about)
-    const [userAvatar, setUserAvatar] = useState(user.avatar)
+const validateSchema = Yup.object({
+    name: Yup.string(),
+    about: Yup.string(),
+})
 
-    let editUserBtn = async () => {
+export function EditUserModal({ user, setEditModalShown, refetch }) {
 
-        let newUser = {
-            name: userName,
-            about: userAbout,
-        }
+    const { mutateAsync, isError, error, isLoading } = useMutation({
+        mutationFn: (values) => editUser(values)
+    })
 
-        let newUserAvatar = {
-            avatar: userAvatar
-        }
+    const formik = useFormik({
+        initialValues: {
+            name: user.name,
+            about: user.about,
+        },
+        validationSchema: validateSchema,
+        onSubmit: async (values) => {
 
-        try {
-            await editUser(newUser);
-            await editAvatar(newUserAvatar);
-            let info = await getMe()
-            setUser(info)
+            await mutateAsync(values);
             setEditModalShown(false)
-        } catch (err) {
-            alert(err)
-        }
+            refetch();
 
-    }
+        },
+    });
 
     return (
-        <div className="App">
+        <>
+            {isLoading ? (
+                <CircularProgress color="secondary" className="loader" />
+            ) : (
+                <form onSubmit={formik.handleSubmit} className='form'>
+                    <p>Отредактируйте данные</p>
 
-            <Paper className='paper' elevation={3} >
-                <p>Отредактируйте данные</p>
-                <TextField name="name" label="Имя" type='text' value={userName} onChange={(e) => setUserName(e.target.value)} />
-                <TextField name="about" label="О вас" type="text" value={userAbout} onChange={(e) => setUserAbout(e.target.value)} />
-                <TextField name="avatar" label="Ссылка на аватар" type="text" value={userAvatar} onChange={(e) => setUserAvatar(e.target.value)} />
+                    {isError && (
+                        <p className="error">{error.message}</p>
+                    )}
 
-                <Button variant="contained" color="secondary" onClick={() => { editUserBtn() }}>Изменить</Button>
-                <a style={{ cursor: 'pointer' }} onClick={() => { setEditModalShown(false) }}>Назад</a>
-            </Paper>
-
-        </div>
+                    <TextField className='input'
+                        id="name"
+                        name="name"
+                        label="name"
+                        type='text'
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        error={formik.touched.name && Boolean(formik.errors.name)}
+                        helperText={formik.touched.name && formik.errors.name}
+                    />
+                    <TextField className='input'
+                        id="about"
+                        name="about"
+                        label="about"
+                        type="text"
+                        value={formik.values.about}
+                        onChange={formik.handleChange}
+                        error={formik.touched.about && Boolean(formik.errors.about)}
+                        helperText={formik.touched.about && formik.errors.about}
+                    />
+                    <Button variant="contained" color="secondary" type='submit' className='btn'>Изменить</Button>
+                </form>
+            )
+            }
+        </>
     )
 }

@@ -2,54 +2,94 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
-import { signin } from '../Api';
+import { useContext } from 'react';
+import { signin } from '../api';
 import { FirstContext } from '../App';
+import { useMutation } from '@tanstack/react-query';
+import { CircularProgress } from '@mui/material';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 
+const validateSchema = Yup.object({
+    email: Yup.string()
+        .required('Это поле обязательное для заполнения'),
+    password: Yup.string()
+        .required('Это поле обязательное для заполнения'),
+})
 
 export function SignIn() {
 
-    const [email, SetEmail] = useState('');
-    const [password, SetPassword] = useState('');
-    const { setIsAuth } = useContext(FirstContext)
-
+    const { refetchAuth } = useContext(FirstContext)
     const navigate = useNavigate();
     const clickToMain = () => {
-        console.log('ctm signin')
         return navigate('/main')
     }
 
-    let valuesSignIn = {
-        email: email,
-        password: password
-    }
-
-    const onSingInClick = async () => {
-        try {
-            const res = await signin(valuesSignIn);
-
-            if (res == true) {
-                setIsAuth(true)
-                clickToMain()
-            }
-        } catch (error) {
-            alert(error.message)
+    const { mutateAsync, isError, error, isLoading } = useMutation({
+        mutationFn: async (valuesSignIn) => {
+            await signin(valuesSignIn)
+            await refetchAuth()
+            clickToMain()
         }
-    }
+    })
 
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+
+        },
+        validationSchema: validateSchema,
+        onSubmit: async (values) => {
+            await mutateAsync(values)
+
+        },
+    });
 
     return (
-        <div className="App">
-
+        // <div className="App" >
+        <form onSubmit={formik.handleSubmit} className='form'>
             <Paper className='paper' elevation={3} >
-                <p>Введите данные для авторизации</p>
-                <TextField name="email" label="Почтовый адрес" type='email' value={email} onChange={(e) => SetEmail(e.target.value)} />
-                <TextField name="password" label="Пароль" type="password" value={password} onChange={(e) => SetPassword(e.target.value)} />
 
-                <Button variant="contained" color="secondary" onClick={async () => { await onSingInClick() }}>Войти</Button>
-                <a onClick={() => { navigate('/') }}>Назад</a>
+                {isLoading ? (
+                    <CircularProgress color="secondary" className="loader" />
+                ) : (
+
+                    <>
+                        <p>Введите данные для авторизации</p>
+
+                        {isError && (
+                            <p className="error_inWindow">{error.message}</p>
+                        )}
+
+                        <TextField className='input'
+                            id="email"
+                            name="email"
+                            label="email"
+                            type='email'
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            error={formik.touched.email && Boolean(formik.errors.email)}
+                            helperText={formik.touched.email && formik.errors.email}
+                        />
+                        <TextField className='input'
+                            id="password"
+                            name="password"
+                            label="password"
+                            type='password'
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            error={formik.touched.password && Boolean(formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
+                        />
+
+                        <Button variant="contained" color="secondary" type='submit'>Войти</Button>
+                        <a onClick={() => { navigate('/signup') }}>Вернуться к регистрации</a>
+                    </>
+                )}
+
             </Paper>
-
-        </div>
+        </form>
+        // </div >
     )
 }

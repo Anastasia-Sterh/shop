@@ -1,24 +1,21 @@
-
-import { useState, useEffect } from "react";
+import { useQuery } from '@tanstack/react-query'
 import { ProductCard } from "../components/ProductCard";
-import { getProducts } from "../Api";
+import { getProducts } from "../api";
 import { CircularProgress } from "@mui/material";
 
 export function Main() {
 
-    const [products, setProducts] = useState([])
+    const { data: products, isLoading, isError, error } = useQuery({
+        queryKey: ['getProduct'],
+        queryFn: () => getProducts()
+    })
 
-    useEffect(() => {
-        getProducts()
-            .then((product) => {
-                setProducts(product)
-            })
-            .catch(err => alert(err))
-    }, [])
-
-    if (products.length == 0) {
-
+    if (isLoading) {
         return <CircularProgress color="secondary" className="loader" />
+    }
+
+    if (isError) {
+        return <p className='error'>Error happened: {error.message}</p>
     }
 
     return (
