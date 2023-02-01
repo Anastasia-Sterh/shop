@@ -35,11 +35,11 @@ export function PageOfProduct() {
     }
 
     if (isErrorReviews) {
-        return <p>Error happened: {errorReviews.message}</p>
+        return <p className="error">{errorReviews.message}</p>
     }
 
     if (isErrorProduct) {
-        return <p>Error happened: {errorProduct.message}</p>
+        return <p className="error">{errorProduct.message}</p>
     }
 
     return (

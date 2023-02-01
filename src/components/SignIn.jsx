@@ -59,7 +59,7 @@ export function SignIn() {
                         <p>Введите данные для авторизации</p>
 
                         {isError && (
-                            <p className="error_inWindow">{error.message}</p>
+                            <p className="error--inWindow">{error.message}</p>
                         )}
 
                         <TextField className='input'

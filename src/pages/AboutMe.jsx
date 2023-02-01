@@ -26,7 +26,7 @@ export function AboutMe() {
     }
 
     if (isError) {
-        return <p className="error">Error happened: {error.message}</p>
+        return <p className="error">{error.message}</p>
     }
 
     const onAddProductClick = () => {

@@ -42,7 +42,7 @@ export function EditUserModal({ user, setEditModalShown, refetch }) {
                     <p>Отредактируйте данные</p>
 
                     {isError && (
-                        <p className="error">{error.message}</p>
+                        <p className="error--inWindow">{error.message}</p>
                     )}
 
                     <TextField className='input'

@@ -72,7 +72,7 @@ export function SignUp() {
                             <p>Войдите или зарегистрируйтесь</p>
 
                             {isError && (
-                                <p className="error_inWindow">{error.message}</p>
+                                <p className="error--inWindow">{error.message}</p>
                             )}
 
                             <TextField className='input'

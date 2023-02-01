@@ -12,7 +12,8 @@ export const editUser = async (user) => {
 
     if (res.ok == false) {
 
-        throw new Error("Ошибка HTTP: " + res.status + ';' + res.message)
+        const response = await res.json();
+        throw new Error(response.message);
     }
 
     return user;
@@ -34,7 +35,8 @@ export const editAvatar = async (avatar) => {
 
     if (res.ok == false) {
 
-        throw new Error("Ошибка HTTP: " + res.status + ';' + res.message)
+        const response = await res.json();
+        throw new Error(response.message);
     }
 
     return avatar;
@@ -45,7 +47,7 @@ export const editAvatar = async (avatar) => {
 export const getMe = async () => {
 
 
-    let response = await fetch('https://api.react-learning.ru/v2/9-gr/users/me',
+    const response = await fetch('https://api.react-learning.ru/v2/9-gr/users/me',
         {
             method: 'GET',
             headers: {
@@ -58,7 +60,8 @@ export const getMe = async () => {
 
     if (response.ok == false) {
 
-        throw new Error("Ошибка HTTP: " + response.status + ';' + response.message)
+        const res = await response.json();
+        throw new Error(res.message);
     }
 
     let user = await response.json();
@@ -80,7 +83,8 @@ export const getProducts = async () => {
 
     if (response.ok == false) {
 
-        throw new Error("Ошибка HTTP: " + response.status + ';' + response.message)
+        const res = await response.json();
+        throw new Error(res.message);
     }
 
     let positions = await response.json();
@@ -101,7 +105,7 @@ export const signup = async (newUser) => {
         return true;
     } else {
         const response = await res.json();
-        throw new Error("Ошибка HTTP: " + response.status + ';' + response.message);
+        throw new Error(response.message);
 
     }
 }
@@ -122,7 +126,8 @@ export const signin = async (valuesSignIn) => {
 
         return true;
     } else {
-        throw new Error("Ошибка HTTP: " + res.status + ';' + res.message);
+        const response = await res.json();
+        throw new Error(response.message);
 
     }
 
@@ -169,7 +174,8 @@ export const getOneProduct = async (productID) => {
 
     if (response.ok == false) {
 
-        throw new Error("Ошибка HTTP: " + response.message)
+        const res = await response.json();
+        throw new Error(res.message);
     }
 
     let product = await response.json();
@@ -191,7 +197,8 @@ export const getReviewsOneProduct = async (productID) => {
 
     if (response.ok == false) {
 
-        throw new Error("Ошибка HTTP: " + response.message)
+        const res = await response.json();
+        throw new Error(res.message);
     }
 
     let review = await response.json();
@@ -214,7 +221,8 @@ export const addProduct = async (product) => {
 
     if (res.ok == false) {
 
-        throw new Error("Ошибка HTTP: " + res.status + ';' + res.message)
+        const response = await res.json();
+        throw new Error(response.message);
     }
 
     return product;

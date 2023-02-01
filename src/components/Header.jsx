@@ -29,7 +29,7 @@ export function Header() {
                 <div className='header_icons' >
                     <PetsIcon />
                 </div>
-                <span style={{ cursor: 'pointer' }}>Магазин с конечностями</span>
+                <span>Магазин с конечностями</span>
 
             </Link>
             <div className="header__search search">
