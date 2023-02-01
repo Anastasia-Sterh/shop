@@ -1,3 +1,12 @@
+export const getMyProducts = async () => {
+    const allProducts = await getProducts();
+    const user = await getMe();
+    const userID = user._id;
+    const myProducts = allProducts.filter(product => product.author._id == userID);
+    return myProducts;
+
+}
+
 export const editUser = async (user) => {
 
     const res = await fetch(`https://api.react-learning.ru/v2/9-gr/users/me`, {

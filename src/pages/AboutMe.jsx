@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Modal } from "../components/Modal";
 import { EditUserAvatarModal } from "../components/EditUserAvatarModal";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { getMyProducts } from "../api";
+import { MyProducts } from "../components/MyProducts";
 
 export function AboutMe() {
 
@@ -21,12 +23,28 @@ export function AboutMe() {
         queryFn: () => getMe()
     })
 
+    const { data: products, isLoading: isLoadingMyProducts, isError: isErrorMyProducts, error: errorMyProducts, refetch: refetchMyProducts } = useQuery({
+        queryKey: ['getMyProducts'],
+        queryFn: () => getMyProducts()
+
+    })
+
     if (isLoading) {
         return <CircularProgress color="secondary" className="loader" />
     }
 
     if (isError) {
         return <p className="error">{error.message}</p>
+    }
+
+
+
+    if (isLoadingMyProducts) {
+        return <CircularProgress color="secondary" className="loader" />
+    }
+
+    if (isErrorMyProducts) {
+        return <p className='error'>{errorMyProducts.message}</p>
     }
 
     const onAddProductClick = () => {
@@ -49,12 +67,18 @@ export function AboutMe() {
             </div>
 
             <h1>Мои продукты</h1>
-            <div className="about-me__add" onClick={() => { onAddProductClick(); }}>
-                <AddIcon style={{ fontSize: '80px', color: 'gray' }} />
+            <div className="myProducts">
+                <div className="myProducts__add" onClick={() => { onAddProductClick(); }}>
+                    <AddIcon style={{ fontSize: '80px', color: 'gray' }} />
+
+                </div>
+                {products.map(product => (
+                    <MyProducts key={product._id} product={product} />
+                ))}
             </div>
 
             <Modal isOpen={addModalShown} closeModal={() => setAddModalShown(false)}>
-                <AddProduct setAddModalShown={setAddModalShown} />
+                <AddProduct setAddModalShown={setAddModalShown} refetchMyProducts={refetchMyProducts} />
             </Modal>
 
             <Modal isOpen={editModalShown} closeModal={() => setEditModalShown(false)} >

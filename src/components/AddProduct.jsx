@@ -27,13 +27,14 @@ const validateSchema = Yup.object({
 
 });
 
-export const AddProduct = ({ setAddModalShown }) => {
+export const AddProduct = ({ setAddModalShown, refetchMyProducts }) => {
 
     const { mutateAsync, isError, error, isLoading } = useMutation({
         mutationFn: async (values) => {
             const newTags = values.tags.split(',');
             values.tags = newTags;
             await addProduct(values);
+            refetchMyProducts();
             setAddModalShown(false)
         }
     })
