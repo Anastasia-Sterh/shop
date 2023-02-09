@@ -1,15 +1,19 @@
-import { useQuery } from '@tanstack/react-query'
+import { useParams } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
+import { CircularProgress } from '@mui/material';
+import { search } from "../api";
 import { ProductCard } from "../components/ProductCard";
-import { getProducts } from "../api";
-import { CircularProgress } from "@mui/material";
+
+export function SearchResult() {
 
 
-export function Main() {
+    let { val } = useParams()
+
 
     const { data: products, isLoading, isError, error } = useQuery({
-        queryKey: ['getProduct'],
+        queryKey: ['search', val],
         queryFn: async () => {
-            return await getProducts()
+            return await search(val)
 
         }
     })

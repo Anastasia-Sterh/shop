@@ -7,10 +7,11 @@ import { Header } from "./components/Header";
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
+
 export const FirstContext = React.createContext({});
 
-function App() {
 
+function App() {
 
   const location = useLocation();
   const userHere = location.pathname == '/signup' || location.pathname == '/signin';
@@ -25,7 +26,7 @@ function App() {
     return <CircularProgress color="secondary" className="loader" />
   }
 
-  const valueForContext = { refetchAuth }
+  const valueForContext = { refetchAuth };
 
   if (isAuth === false) {
     if (!userHere) {

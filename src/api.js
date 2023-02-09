@@ -1,3 +1,29 @@
+export const search = async (values) => {
+
+    const response = await fetch(`https://api.react-learning.ru/products/search?query=${values}`,
+        {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+
+    if (response.ok == false) {
+
+        const res = await response.json();
+        throw new Error(res.message);
+    }
+    console.log(response)
+    let result = await response.json();
+    console.log(result)
+    return result;
+
+}
+
+
+
 export const getMyProducts = async () => {
     const allProducts = await getProducts();
     const user = await getMe();
@@ -238,3 +264,47 @@ export const addProduct = async (product) => {
 
 }
 
+export const deleteProduct = async (productID) => {
+    const res = await fetch(`https://api.react-learning.ru/products/${productID}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            },
+
+        })
+
+
+    if (res.ok == false) {
+
+        const response = await res.json();
+        throw new Error(response.message);
+    }
+
+
+}
+
+export const editProduct = async (product) => {
+
+    let productID = product._id;
+
+    const res = await fetch(`https://api.react-learning.ru/products/${productID}`, {
+        method: 'PATCH',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        },
+        body: JSON.stringify(product)
+    });
+
+    if (res.ok == false) {
+
+        const response = await res.json();
+        throw new Error(response.message);
+    }
+
+    return product;
+}

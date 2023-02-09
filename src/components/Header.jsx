@@ -6,8 +6,9 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PetsIcon from '@mui/icons-material/Pets';
 import LogoutIcon from '@mui/icons-material/Logout';
-import SearchIcon from '@mui/icons-material/Search';
+
 import { Link, NavLink } from 'react-router-dom';
+import { Search } from "./Search";
 
 
 export function Header() {
@@ -32,11 +33,9 @@ export function Header() {
                 <span>Магазин с конечностями</span>
 
             </Link>
-            <div className="header__search search">
-                <input name="search" label="Что вы ищете?" type='text' className="search__input" />
-                <SearchIcon className="search__input-icon" />
 
-            </div>
+            <Search />
+
             <div className="header__right">
                 <NavLink
                     to="" className='header__icons'>

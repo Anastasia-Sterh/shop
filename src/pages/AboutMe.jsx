@@ -12,11 +12,13 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { getMyProducts } from "../api";
 import { MyProducts } from "../components/MyProducts";
 
+
 export function AboutMe() {
 
     const [editModalShown, setEditModalShown] = useState(false)
     const [addModalShown, setAddModalShown] = useState(false)
     const [editAvatarModalShown, setEditAvatarModalShown] = useState(false);
+    const [editProductModalShown, setEditProductModalShown] = useState(false);
 
     const { data: user, isLoading, isError, error, refetch } = useQuery({
         queryKey: ['getMe'],
@@ -73,7 +75,8 @@ export function AboutMe() {
 
                 </div>
                 {products.map(product => (
-                    <MyProducts key={product._id} product={product} />
+                    <MyProducts key={product._id} product={product} refetchMyProducts={refetchMyProducts}
+                        editProductModalShown={editProductModalShown} setEditProductModalShown={setEditProductModalShown} />
                 ))}
             </div>
 

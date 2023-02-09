@@ -79,38 +79,6 @@ body {
         color: white
     }
 
-    .search {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        max-width: 500px;
-
-        &__input {
-            width: 100%;
-            background-color: white;
-            margin: 10px;
-            height: 48px;
-            font-family: 'Raleway', sans-serif;
-            font-size: 18px;
-            border-radius: 5px;
-            border: none;
-            padding-left: 7px;
-            background-color: rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.244) inset;
-            color: white;
-            font-weight: 500;
-            outline: none;
-            box-sizing: border-box;
-
-            &-icon {
-                position: relative;
-                left: -45px;
-                opacity: 0.6;
-            }
-        }
-
-    }
 
     &__right {
         display: flex;
@@ -133,11 +101,60 @@ body {
             background-color: rgba(0, 0, 0, 0.1);
         }
     }
+
+    &__center {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+.search {
+    &__container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        // max-width: 500px;
+        // min-width: 300px;
+        position: relative;
+
+
+        &-input {
+            width: 100%;
+            background-color: white;
+            margin: 10px;
+            height: 48px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            padding-left: 7px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.244) inset;
+            color: white;
+            font-weight: 500;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        &-button {
+            position: absolute;
+            left: -45px;
+            top: 4px;
+            opacity: 0.6;
+            border: none;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0.01);
+            cursor: pointer;
+            position: relative;
+        }
+    }
 }
 
 .active {
     border-bottom: 3px solid orange; //?
 }
+
 
 
 
@@ -177,6 +194,15 @@ body {
         color: black;
         font-size: 20px;
         margin-top: 10px;
+        display: flex;
+        align-items: center;
+
+        &--old {
+            text-decoration: line-through;
+            color: rgb(194, 192, 192);
+            font-weight: 400;
+            margin-left: 15px;
+        }
     }
 
     img {

@@ -13,6 +13,7 @@ import { SignUp } from './components/SignUp';
 import { PageOfProduct } from './pages/PageOfProduct';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NotFound } from './pages/NotFound';
+import { SearchResult } from './pages/SearchResult';
 
 const queryClient = new QueryClient()
 
@@ -49,6 +50,12 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <NotFound />
+
+      },
+
+      {
+        path: "/products/search/:val",
+        element: <SearchResult />
 
       }
     ]

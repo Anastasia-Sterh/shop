@@ -1,9 +1,10 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { addProduct } from '../api';
 import { Button, TextField } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { CircularProgress } from '@mui/material';
+import { editProduct } from '../api';
+
 
 
 
@@ -13,7 +14,7 @@ const validateSchema = Yup.object({
     stock: Yup.number()
         .max(100, 'Количество товаров не должно превышать ста единиц'),
     pictures: Yup.string().url('Добавьте ссылку на изображение товара').required('Добавьте ссылку на изображение товара'),
-    tags: Yup.string(),
+    // tags: Yup.string(),
     name: Yup.string()
         .min(3, 'Необходимо больше трех символов')
         .max(100, 'Не может превышать ста символов')
@@ -26,28 +27,32 @@ const validateSchema = Yup.object({
 
 });
 
-export const AddProduct = ({ setAddModalShown, refetchMyProducts }) => {
+export const EditProduct = ({ product, refetchMyProducts, setEditProductModalShown }) => {
+
 
     const { mutateAsync, isError, error, isLoading } = useMutation({
         mutationFn: async (values) => {
+            const id = product._id
+            values._id = id;
             const newTags = values.tags.split(',');
             values.tags = newTags;
-            await addProduct(values);
+            await editProduct(values);
             refetchMyProducts();
-            setAddModalShown(false)
+            setEditProductModalShown(false)
         }
     })
 
+
     const formik = useFormik({
         initialValues: {
-            discount: '',
-            stock: '',
-            pictures: '',
-            tags: '',
-            name: "",
-            price: '',
-            wight: "",
-            description: "",
+            discount: product.discount,
+            stock: product.stock,
+            pictures: product.pictures,
+            tags: product.tags.join(),
+            name: product.name,
+            price: product.price,
+            wight: product.wight,
+            description: product.description,
         },
         validationSchema: validateSchema,
         onSubmit: async (values) => {
@@ -62,7 +67,7 @@ export const AddProduct = ({ setAddModalShown, refetchMyProducts }) => {
             ) : (
                 <form onSubmit={formik.handleSubmit} className='form'>
 
-                    <h3>Ваш новый продукт</h3>
+                    <h3>Измените продукт</h3>
 
                     {isError && (
                         <p className="error--inWindow">{error.message}</p>
@@ -151,7 +156,7 @@ export const AddProduct = ({ setAddModalShown, refetchMyProducts }) => {
                     />
 
                     <Button color="primary" variant="contained" type="submit" className='btn'>
-                        Добавить
+                        Редактировать
                     </Button>
                 </form>
             )}

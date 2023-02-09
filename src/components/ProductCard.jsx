@@ -7,9 +7,12 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import { useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { optionalPrice } from '../utils';
 
 export function ProductCard({ product }) {
     const navigate = useNavigate()
+
+
 
     return (
 
@@ -25,7 +28,17 @@ export function ProductCard({ product }) {
                 </Typography>
                 <Typography variant="body2" color="text.secondary" component="div">
                     {product.wight} <br />
-                    <div className='card__price'> {product.price} ₽ </div>
+                    <div className='card__price'>
+                        {product.discount == 0 || product.discount == 100 ? (
+                            <> {product.price} ₽</>
+                        ) : (
+                            <>{optionalPrice(product.price, product.discount)} ₽
+                                <div className='card__price--old'> {product.price} ₽ </div>
+                            </>
+                        )}
+                    </div>
+
+
                 </Typography>
                 <div className='card__chip'>
                     {product.tags.map((tag) => <Chip
