@@ -8,9 +8,13 @@ import Chip from '@mui/material/Chip';
 import { useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { optionalPrice } from '../utils';
+import { useDispatch } from 'react-redux'
+import { addInCart } from '../toolkit/slices/cartSlice';
+
 
 export function ProductCard({ product }) {
     const navigate = useNavigate()
+    const dispatch = useDispatch();
 
 
 
@@ -29,7 +33,7 @@ export function ProductCard({ product }) {
                 <Typography variant="body2" color="text.secondary" component="div">
                     {product.wight} <br />
                     <div className='card__price'>
-                        {product.discount == 0 || product.discount == 100 ? (
+                        {product.discount == 0 ? (
                             <> {product.price} ₽</>
                         ) : (
                             <>{optionalPrice(product.price, product.discount)} ₽
@@ -51,7 +55,7 @@ export function ProductCard({ product }) {
                 </div>
             </CardContent>
             <CardActions className='card__buttons'>
-                <Button size="small" variant="contained" onClick={(e) => { e.stopPropagation(); }}>В корзину</Button>
+                <Button size="small" variant="contained" onClick={(e) => { e.stopPropagation(); dispatch(addInCart(product._id)) }}>В корзину</Button>
                 <FavoriteIcon className='card__likes' onClick={(e) => { e.stopPropagation(); }} /> {product.likes.length}
             </CardActions>
         </Card>

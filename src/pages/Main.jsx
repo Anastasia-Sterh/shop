@@ -1,30 +1,36 @@
 import { useQuery } from '@tanstack/react-query'
 import { ProductCard } from "../components/ProductCard";
-import { getProducts } from "../api";
 import { CircularProgress } from "@mui/material";
+import { useSelector } from 'react-redux';
+import { search } from '../api';
+import { getSearchSelector } from '../toolkit/slices/searchSlice';
 
 
 export function Main() {
 
-    const { data: products, isLoading, isError, error } = useQuery({
-        queryKey: ['getProduct'],
+    const debounceSearch = useSelector(getSearchSelector);
+
+    const { data: resultSearch, isLoading: isLoadingSearch, isError: isErrorSearch, error: errorSearch } = useQuery({
+        queryKey: ['search', debounceSearch],
         queryFn: async () => {
-            return await getProducts()
+            return await search(debounceSearch)
 
         }
     })
 
-    if (isLoading) {
+    if (isLoadingSearch) {
         return <CircularProgress color="secondary" className="loader" />
     }
 
-    if (isError) {
-        return <p className='error'>{error.message}</p>
+    if (isErrorSearch) {
+        return <p className='error'>{errorSearch.message}</p>
     }
+
+
 
     return (
         <div className="main">
-            {products.map(product => (
+            {resultSearch.map(product => (
                 <ProductCard key={product._id} product={product} />
             ))}
         </div>

@@ -15,14 +15,11 @@ export const search = async (values) => {
         const res = await response.json();
         throw new Error(res.message);
     }
-    console.log(response)
+
     let result = await response.json();
-    console.log(result)
     return result;
 
 }
-
-
 
 export const getMyProducts = async () => {
     const allProducts = await getProducts();
@@ -54,7 +51,6 @@ export const editUser = async (user) => {
     return user;
 }
 
-
 export const editAvatar = async (avatar) => {
 
 
@@ -76,8 +72,6 @@ export const editAvatar = async (avatar) => {
 
     return avatar;
 }
-
-
 
 export const getMe = async () => {
 
@@ -103,7 +97,6 @@ export const getMe = async () => {
     return user;
 
 }
-
 
 export const getProducts = async () => {
     let response = await fetch('https://api.react-learning.ru/products',
@@ -168,7 +161,6 @@ export const signin = async (valuesSignIn) => {
 
 }
 
-
 export const isUserAuth = async () => {
 
     if (localStorage.getItem('token') == undefined) {
@@ -218,6 +210,15 @@ export const getOneProduct = async (productID) => {
 
 }
 
+export const getManyProducts = async (productsIDs) => {
+    let products = [];
+    for (const productID of productsIDs) {
+        products.push(getOneProduct(productID))
+    }
+
+    console.log(products);
+    return await Promise.all(products);
+}
 
 export const getReviewsOneProduct = async (productID) => {
     let response = await fetch(`https://api.react-learning.ru/products/review/${productID}`,

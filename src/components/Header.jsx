@@ -9,10 +9,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 import { Link, NavLink } from 'react-router-dom';
 import { Search } from "./Search";
+import { useSelector } from "react-redux";
 
 
 export function Header() {
 
+    const productsInCart = useSelector(state => state.productsInCart);
+    const counter = productsInCart.length;
+    console.log(counter)
     const { refetchAuth } = useContext(FirstContext)
 
     function clearToken() {
@@ -38,8 +42,9 @@ export function Header() {
 
             <div className="header__right">
                 <NavLink
-                    to="" className='header__icons'>
+                    to="/cart" className='header__icons'>
                     <ShoppingCartIcon />
+                    <div className="header__right-counter">{counter}</div>
                     <span>Корзина</span>
                 </NavLink>
 
