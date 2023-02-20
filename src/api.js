@@ -216,7 +216,6 @@ export const getManyProducts = async (productsIDs) => {
         products.push(getOneProduct(productID))
     }
 
-    console.log(products);
     return await Promise.all(products);
 }
 

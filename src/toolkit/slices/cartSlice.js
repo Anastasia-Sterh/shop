@@ -8,19 +8,28 @@ const cartSlice = createSlice({
     reducers: {
 
         deleteProductInCart(state, action) {
-            return state.filter(product => product._id !== action.payload)
+            return state.filter(product => action.payload !== product.id)
         },
 
         clearCart() {
             return []
         },
 
+        changeCount(state, action) {
+            const idAndValue = action.payload;
+            if (idAndValue.value < 0) {
+                return state.filter(product => idAndValue.id !== product.id)
+            }
+            for (let product of state) {
+                if (product.id == idAndValue.id) {
+                    product.count = idAndValue.value;
+                }
+
+            }
+        },
+
         addInCart(state, action) {
             const id = action.payload;
-            // if (state.length == 0) {
-            //     state.push({id:action.payload, count:1})
-            // }
-
             for (let i = 0; i < state.length; i++) {
                 if (id == state[i].id) {
                     state[i].count++;
@@ -37,7 +46,7 @@ const cartSlice = createSlice({
     }
 })
 
-export const { deleteProductInCart, clearCart, addInCart } = cartSlice.actions;
+export const { deleteProductInCart, clearCart, addInCart, changeCount } = cartSlice.actions;
 
 export const getCartSelector = (state) => state.productsInCart;
 
