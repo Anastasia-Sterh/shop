@@ -237,7 +237,7 @@ export const getReviewsOneProduct = async (productID) => {
     }
 
     let review = await response.json();
-    return review;
+    return review.reverse();
 
 }
 
@@ -307,4 +307,28 @@ export const editProduct = async (product) => {
     }
 
     return product;
+}
+
+export const addReview = async (value) => {
+    let productID = value.id;
+    let values = value.values;
+    const res = await fetch(`https://api.react-learning.ru/products/review/${productID}`,
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            },
+            body: JSON.stringify(values)
+
+        });
+    console.log(values)
+    if (res.ok == false) {
+
+        const response = await res.json();
+        throw new Error(response.message);
+    }
+
+    return values;
 }

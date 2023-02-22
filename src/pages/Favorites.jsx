@@ -31,6 +31,9 @@ export function Favorites() {
 
 
         <div className="favorites">
+            <div className="favorites__h1">
+                <h1>Избранные товары</h1>
+            </div>
             {products.map(product => (
                 <CardInFavorites key={product._id} product={product} />
             ))}</div>

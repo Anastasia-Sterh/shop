@@ -15,7 +15,6 @@ export function Header() {
 
     const productsInCart = useSelector(state => state.productsInCart);
     const counter = productsInCart.length;
-    console.log(counter)
     const { refetchAuth } = useContext(FirstContext)
 
     function clearToken() {

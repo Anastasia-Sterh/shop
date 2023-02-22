@@ -4,9 +4,12 @@ import { useMutation } from '@tanstack/react-query';
 import { deleteProduct } from '../api';
 import { EditProduct } from './EditProduct';
 import { Modal } from './Modal';
+import { useState } from 'react';
 
 
-export function MyProducts({ product, refetchMyProducts, editProductModalShown, setEditProductModalShown }) {
+export function MyProducts({ product, refetchMyProducts }) {
+
+    const [editProductModalShown, setEditProductModalShown] = useState(false);
     const navigate = useNavigate();
 
     const id = product._id;
@@ -15,7 +18,7 @@ export function MyProducts({ product, refetchMyProducts, editProductModalShown, 
         mutationFn: async (id) => {
             await deleteProduct(id);
             refetchMyProducts();
-            console.log('polikarp')
+
         }
     })
 

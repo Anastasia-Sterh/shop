@@ -412,6 +412,10 @@ body {
 
 .favorites {
     margin-top: 75px;
+
+    &__h1 {
+        @include flex-center-column();
+    }
 }
 
 .loader {
@@ -585,6 +589,12 @@ body {
     min-height: 100vh;
     justify-content: space-evenly;
     margin-top: 150px;
+
+    &__btn {
+
+        display: flex;
+        justify-content: center;
+    }
 
     &__reviews {
         width: calc(100% - 60px);

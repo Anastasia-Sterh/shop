@@ -17,15 +17,11 @@ export function Cart() {
     const haveCheckbox = useSelector(state => state.haveCheckbox)
     const ids = cartItems.map(item => item.id)
 
-    console.log('ids', ids)
-
     const { data: products, isLoading, isError, error } = useQuery({
         queryKey: ['getManyProducts', ids],
         queryFn: () => getManyProducts(ids)
     })
 
-    console.log(products, 'in cart')
-    console.log(cartItems, 'count?')
 
     if (cartItems.length == 0) {
         return (
@@ -67,7 +63,6 @@ export function Cart() {
     }
 
 
-    // 
     const findCartItem = (id) => {
         for (let item of cartItems) {
             if (item.id == id) {
@@ -76,12 +71,7 @@ export function Cart() {
         }
     }
 
-    console.log(findCartItem('622c77cc77d63f6e70967d1e'))
-    console.log(haveCheckbox, 'check')
 
-    // findCartItem(products[0]._id)
-
-    // 
     const priceOfProductsInCart = () => {
         let price = 0;
         for (const product of products) {
@@ -106,7 +96,7 @@ export function Cart() {
         return price;
     }
 
-    console.log(priceOfProductsInCart(), 'sum')
+
     return (
         <>
             <div className="cart">

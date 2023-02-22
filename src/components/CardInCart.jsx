@@ -40,7 +40,7 @@ export function CardInCart({ product }) {
     }
 
     let new_price = optionalPrice(product.price, product.discount) * count;
-    console.log(new_price, 'price')
+
 
     return (
         <Paper className="cart-card" elevation={2} >
@@ -67,7 +67,7 @@ export function CardInCart({ product }) {
             <div className='cart-card__price'>
 
                 {product.discount == 0 ? (
-                    <> {product.price} * {count} ₽</>
+                    <> {product.price * count} ₽</>
                 ) : (
                     <>{new_price} ₽
                         <div className='price--old'> {product.price * count} ₽ </div>

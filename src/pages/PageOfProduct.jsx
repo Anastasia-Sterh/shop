@@ -1,12 +1,17 @@
 import { useParams } from "react-router-dom";
 import { getOneProduct } from "../api";
-import { CircularProgress, Paper } from "@mui/material";
+import { Button, CircularProgress, Paper } from "@mui/material";
 import { getReviewsOneProduct } from "../api";
 import { formatDate } from "../utils";
 import { StarsRating } from "../components/StarsRating";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { Modal } from "../components/Modal";
+import { AddReview } from "../components/AddReview";
 
 export function PageOfProduct() {
+
+    const [openModalReview, setOpenModalReview] = useState(false)
 
     let { productId } = useParams();
 
@@ -25,6 +30,7 @@ export function PageOfProduct() {
         isLoading: isLoadingReviews,
         isError: isErrorReviews,
         error: errorReviews,
+        refetch: refetchReviews
     } = useQuery({
         queryKey: ['getReviews'],
         queryFn: () => getReviewsOneProduct(productId)
@@ -61,6 +67,9 @@ export function PageOfProduct() {
                     {oneProduct.author.name}
                 </div>
             </div>
+            <div className="pageOfProduct__btn">
+                <Button size="small" variant="contained" color='secondary' onClick={() => { setOpenModalReview(true) }}> Оставить отзыв</Button>
+            </div>
             <div className="pageOfProduct__reviews" >
                 {review.map(oneReview =>
                     <div className="pageOfProduct__reviews-oneReview" key={oneReview._id}>
@@ -81,6 +90,10 @@ export function PageOfProduct() {
                 )}
 
             </div>
+
+            <Modal isOpen={openModalReview} closeModal={() => setOpenModalReview(false)}>
+                <AddReview setOpenModalReview={setOpenModalReview} id={productId} refetchReviews={refetchReviews} />
+            </Modal>
         </>
     )
 
