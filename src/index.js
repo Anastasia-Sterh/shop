@@ -16,6 +16,7 @@ import { NotFound } from './pages/NotFound';
 import { Cart } from './pages/Cart';
 import { Provider } from 'react-redux';
 import { store } from './toolkit/store';
+import { Favorites } from './pages/Favorites';
 
 const queryClient = new QueryClient()
 
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />
+      },
+
+      {
+        path: "/favorites",
+        element: <Favorites />
       }
 
 

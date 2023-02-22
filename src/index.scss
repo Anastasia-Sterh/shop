@@ -360,12 +360,7 @@ body {
         display: flex;
         align-items: center;
 
-        &--old {
-            text-decoration: line-through;
-            color: rgb(194, 192, 192);
-            font-weight: 400;
-            margin-left: 15px;
-        }
+
     }
 
     img {
@@ -387,15 +382,16 @@ body {
 
     }
 
-    &__likes {
-        color: red;
-        margin-left: 10px;
-
-    }
-
     .card__media {
         background-size: contain;
     }
+}
+
+.price--old {
+    text-decoration: line-through;
+    color: rgb(194, 192, 192);
+    font-weight: 400;
+    margin-left: 15px;
 }
 
 .paper {
@@ -412,6 +408,10 @@ body {
     justify-content: space-around;
     z-index: 2;
 
+}
+
+.favorites {
+    margin-top: 75px;
 }
 
 .loader {

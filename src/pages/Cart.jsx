@@ -6,6 +6,8 @@ import { getManyProducts } from "../api";
 import { CardInCart } from "../components/CardInCart";
 import { clearCart } from "../toolkit/slices/cartSlice";
 import { toggleSelectAll } from "../toolkit/slices/haveCheckboxSlice";
+import { optionalPrice } from "../utils";
+
 
 export function Cart() {
 
@@ -21,6 +23,9 @@ export function Cart() {
         queryKey: ['getManyProducts', ids],
         queryFn: () => getManyProducts(ids)
     })
+
+    console.log(products, 'in cart')
+    console.log(cartItems, 'count?')
 
     if (cartItems.length == 0) {
         return (
@@ -62,7 +67,46 @@ export function Cart() {
     }
 
 
+    // 
+    const findCartItem = (id) => {
+        for (let item of cartItems) {
+            if (item.id == id) {
+                return item;
+            }
+        }
+    }
 
+    console.log(findCartItem('622c77cc77d63f6e70967d1e'))
+    console.log(haveCheckbox, 'check')
+
+    // findCartItem(products[0]._id)
+
+    // 
+    const priceOfProductsInCart = () => {
+        let price = 0;
+        for (const product of products) {
+            const cartItem = findCartItem(product._id)
+            if (haveCheckbox.includes(cartItem.id)) {
+                price = price + (product.price * cartItem.count)
+            }
+
+        }
+        return price;
+    }
+
+    const priceOfProductsInCartWithDiscount = () => {
+        let price = 0;
+        for (const product of products) {
+            const cartItem = findCartItem(product._id)
+            if (haveCheckbox.includes(cartItem.id)) {
+                price = price + (optionalPrice(product.price, product.discount) * cartItem.count)
+            }
+
+        }
+        return price;
+    }
+
+    console.log(priceOfProductsInCart(), 'sum')
     return (
         <>
             <div className="cart">
@@ -83,10 +127,10 @@ export function Cart() {
                 <div className="cart__right">
                     <Paper className="cart__right-info" elevation={2}>
                         <h3> Ваш заказ</h3>
-                        <p>Количество товаров в корзине: </p>
-                        <p>Стоимость:</p>
-                        <p>Скидка:</p>
-                        <h3>Итоговая цена:</h3>
+                        <p>Количество товаров в заказе: {haveCheckbox.length} </p>
+                        <p>Стоимость: {priceOfProductsInCart()} ₽</p>
+                        <p>Ваша выгода:</p> {priceOfProductsInCart() - priceOfProductsInCartWithDiscount()} ₽
+                        <h3>Итоговая цена: {priceOfProductsInCartWithDiscount()} ₽</h3>
                         <Button size="small" variant="contained" color='secondary'>Заказать</Button>
                     </Paper>
 

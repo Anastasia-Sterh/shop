@@ -3,7 +3,8 @@ export const initialState = {
     search: {
         search: '',
     },
-    haveCheckbox: []
+    haveCheckbox: [],
+    favorites: []
 }
 
 export const getInitialState = () => {

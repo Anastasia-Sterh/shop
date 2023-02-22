@@ -6,17 +6,27 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import { useNavigate } from 'react-router-dom';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { optionalPrice } from '../utils';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addInCart } from '../toolkit/slices/cartSlice';
+import { IconButton } from '@mui/material';
+import { addInFavorites } from '../toolkit/slices/favoritesSlice';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 export function ProductCard({ product }) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
+    const ids = useSelector(state => state.favorites)
 
-
+    const isInFavorites = () => {
+        if (ids.includes(product._id)) {
+            return true;
+        } else {
+            return false
+        }
+    }
 
     return (
 
@@ -37,7 +47,7 @@ export function ProductCard({ product }) {
                             <> {product.price} ₽</>
                         ) : (
                             <>{optionalPrice(product.price, product.discount)} ₽
-                                <div className='card__price--old'> {product.price} ₽ </div>
+                                <div className='price--old'> {product.price} ₽ </div>
                             </>
                         )}
                     </div>
@@ -56,7 +66,14 @@ export function ProductCard({ product }) {
             </CardContent>
             <CardActions className='card__buttons'>
                 <Button size="small" variant="contained" onClick={(e) => { e.stopPropagation(); dispatch(addInCart(product._id)) }}>В корзину</Button>
-                <FavoriteIcon className='card__likes' onClick={(e) => { e.stopPropagation(); }} /> {product.likes.length}
+
+                <IconButton color="primary" onClick={(e) => { e.stopPropagation(); dispatch(addInFavorites(product._id)) }} >
+                    {isInFavorites() ? (
+                        <FavoriteIcon color="warning" className='card__likes' />
+                    ) : (
+                        <FavoriteBorderIcon className='card__likes' />
+                    )}
+                </IconButton>
             </CardActions>
         </Card>
     )

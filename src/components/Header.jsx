@@ -2,11 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { useContext } from "react";
 import { FirstContext } from "../App";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PetsIcon from '@mui/icons-material/Pets';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link, NavLink } from 'react-router-dom';
 import { Search } from "./Search";
 import { useSelector } from "react-redux";
@@ -49,9 +48,9 @@ export function Header() {
                 </NavLink>
 
                 <NavLink
-                    to="/main" className='header__icons'>
-                    <MenuBookIcon />
-                    <span>Каталог</span>
+                    to="/favorites" className='header__icons'>
+                    <FavoriteBorderIcon />
+                    <span>Избранное</span>
 
                 </NavLink>
                 <NavLink

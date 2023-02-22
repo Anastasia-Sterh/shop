@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { productsInCartReducer } from "./slices/cartSlice";
+import { favoritesReducer } from "./slices/favoritesSlice";
 import { haveCheckboxReducer } from "./slices/haveCheckboxSlice";
 import { searchReducer } from "./slices/searchSlice";
 
 const mainReducer = combineReducers({
     productsInCart: productsInCartReducer,
     search: searchReducer,
-    haveCheckbox: haveCheckboxReducer
+    haveCheckbox: haveCheckboxReducer,
+    favorites: favoritesReducer
 
 })
 

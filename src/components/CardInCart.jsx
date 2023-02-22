@@ -6,6 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { changeCount, deleteProductInCart } from "../toolkit/slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { toggleCheckbox } from "../toolkit/slices/haveCheckboxSlice";
+import { optionalPrice } from "../utils";
 
 export function CardInCart({ product }) {
     const dispatch = useDispatch()
@@ -38,6 +39,9 @@ export function CardInCart({ product }) {
 
     }
 
+    let new_price = optionalPrice(product.price, product.discount) * count;
+    console.log(new_price, 'price')
+
     return (
         <Paper className="cart-card" elevation={2} >
             <CloseIcon className='cart-card__icon' onClick={deleteOneProduct} />
@@ -60,7 +64,17 @@ export function CardInCart({ product }) {
                 </IconButton>
 
             </div>
-            <span className='cart-card__price'>{product.price} ₽</span>
+            <div className='cart-card__price'>
+
+                {product.discount == 0 ? (
+                    <> {product.price} * {count} ₽</>
+                ) : (
+                    <>{new_price} ₽
+                        <div className='price--old'> {product.price * count} ₽ </div>
+                    </>
+                )}
+
+            </div>
         </Paper>
     )
 }
