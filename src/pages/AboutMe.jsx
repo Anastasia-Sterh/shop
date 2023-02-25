@@ -2,15 +2,16 @@ import { CircularProgress } from "@mui/material";
 import { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import { EditUserModal } from "../components/EditUserModal";
+import { EditUserModal } from "../components/aboutMe/EditUserModal";
 import { getMe } from "../api";
-import { AddProduct } from "../components/AddProduct";
+import { AddProduct } from "../components/aboutMe/AddProduct";
 import { useQuery } from "@tanstack/react-query";
 import { Modal } from "../components/Modal";
-import { EditUserAvatarModal } from "../components/EditUserAvatarModal";
+import { EditUserAvatarModal } from "../components/aboutMe/EditUserAvatarModal";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { getMyProducts } from "../api";
-import { MyProducts } from "../components/MyProducts";
+import { MyProducts } from "../components/aboutMe/MyProducts";
+
 
 
 export function AboutMe() {

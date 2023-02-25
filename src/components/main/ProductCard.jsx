@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import { useNavigate } from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { optionalPrice } from '../utils';
+import { optionalPrice } from '../../utils';
 import { useDispatch, useSelector } from 'react-redux'
-import { addInCart } from '../toolkit/slices/cartSlice';
+import { addInCart } from '../../toolkit/slices/cartSlice';
 import { IconButton } from '@mui/material';
-import { addInFavorites } from '../toolkit/slices/favoritesSlice';
+import { addInFavorites } from '../../toolkit/slices/favoritesSlice';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
@@ -74,6 +74,7 @@ export function ProductCard({ product }) {
                         <FavoriteBorderIcon className='card__likes' />
                     )}
                 </IconButton>
+                <FavoriteIcon color='secondary'>  </FavoriteIcon>{product.likes.length}
             </CardActions>
         </Card>
     )

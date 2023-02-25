@@ -1,9 +1,9 @@
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { deleteProduct } from '../api';
+import { deleteProduct } from '../../api';
 import { EditProduct } from './EditProduct';
-import { Modal } from './Modal';
+import { Modal } from '../Modal';
 import { useState } from 'react';
 
 

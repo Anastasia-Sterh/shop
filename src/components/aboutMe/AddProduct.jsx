@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { addProduct } from '../api';
+import { addProduct } from '../../api';
 import { Button, TextField } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { CircularProgress } from '@mui/material';

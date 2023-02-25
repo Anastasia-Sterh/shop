@@ -2,8 +2,8 @@ import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { isUserAuth } from "./api";
-import { Footer } from "./components/Footer";
-import { Header } from "./components/Header";
+import { Footer } from "./components/layout/Footer";
+import { Header } from "./components/layout/Header";
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
@@ -42,7 +42,6 @@ function App() {
 
   if (isAuth === true) {
     if (location.pathname == '/' || userHere) {
-
       return <Navigate to="/main" />
     }
   }

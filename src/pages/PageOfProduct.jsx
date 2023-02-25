@@ -3,11 +3,11 @@ import { getOneProduct } from "../api";
 import { Button, CircularProgress, Paper } from "@mui/material";
 import { getReviewsOneProduct } from "../api";
 import { formatDate } from "../utils";
-import { StarsRating } from "../components/StarsRating";
+import { StarsRating } from "../components/pageOfProducts/StarsRating";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Modal } from "../components/Modal";
-import { AddReview } from "../components/AddReview";
+import { AddReview } from "../components/pageOfProducts/AddReview";
 
 export function PageOfProduct() {
 

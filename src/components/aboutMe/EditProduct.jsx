@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Button, TextField } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { CircularProgress } from '@mui/material';
-import { editProduct } from '../api';
+import { editProduct } from '../../api';
 
 
 

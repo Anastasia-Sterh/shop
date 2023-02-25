@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react";
-import { FirstContext } from "../App";
+import { FirstContext } from "../../App";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PetsIcon from '@mui/icons-material/Pets';
@@ -8,10 +8,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link, NavLink } from 'react-router-dom';
 import { Search } from "./Search";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeSearch } from "../../toolkit/slices/searchSlice";
 
 
 export function Header() {
+    const dispatch = useDispatch();
 
     const productsInCart = useSelector(state => state.productsInCart);
     const counter = productsInCart.length;
@@ -28,8 +30,8 @@ export function Header() {
 
     return (
         <div className="header" >
-            <Link to="/main" className="header__left">
-                <div className='header_icons' >
+            <Link to="/main" className="header__left" onClick={() => dispatch(changeSearch(''))}>
+                <div className='header_icons'>
                     <PetsIcon />
                 </div>
                 <span>Магазин с конечностями</span>

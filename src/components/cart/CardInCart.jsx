@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';
-import { changeCount, deleteProductInCart } from "../toolkit/slices/cartSlice";
+import { changeCount, deleteProductInCart } from "../../toolkit/slices/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { toggleCheckbox } from "../toolkit/slices/haveCheckboxSlice";
-import { optionalPrice } from "../utils";
+import { toggleCheckbox } from "../../toolkit/slices/haveCheckboxSlice";
+import { optionalPrice } from "../../utils";
 
 export function CardInCart({ product }) {
     const dispatch = useDispatch()

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { getManyProducts } from "../api";
-import { CardInCart } from "../components/CardInCart";
+import { CardInCart } from "../components/cart/CardInCart";
 import { clearCart } from "../toolkit/slices/cartSlice";
 import { toggleSelectAll } from "../toolkit/slices/haveCheckboxSlice";
 import { optionalPrice } from "../utils";

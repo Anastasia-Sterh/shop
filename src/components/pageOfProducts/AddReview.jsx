@@ -1,7 +1,7 @@
 // import { StarsRating } from "./StarsRating"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import { addReview } from "../api";
+import { addReview } from "../../api";
 import { useMutation } from "@tanstack/react-query";
 import { Button, CircularProgress, TextField } from "@mui/material";
 

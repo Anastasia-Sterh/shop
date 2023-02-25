@@ -2,8 +2,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, Paper } from "@mui/material";
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import { addInCart } from '../toolkit/slices/cartSlice';
-import { deleteProductFromFavorites } from "../toolkit/slices/favoritesSlice";
+import { addInCart } from '../../toolkit/slices/cartSlice';
+import { deleteProductFromFavorites } from '../../toolkit/slices/favoritesSlice';
 
 export function CardInFavorites({ product }) {
 

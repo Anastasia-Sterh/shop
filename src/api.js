@@ -1,4 +1,6 @@
-export const search = async (values) => {
+import { optionalPrice } from "./utils";
+
+export const search = async (values, sortBy) => {
 
     const response = await fetch(`https://api.react-learning.ru/products/search?query=${values}`,
         {
@@ -17,6 +19,39 @@ export const search = async (values) => {
     }
 
     let result = await response.json();
+
+    if (sortBy == 'sortByAscPrice') {
+        result.sort((a, b) => {
+            return optionalPrice(a.price, a.discount) - optionalPrice(b.price, b.discount);
+        })
+
+    }
+
+    if (sortBy == 'sortByDescPrice') {
+        result.sort((a, b) => {
+            return optionalPrice(b.price, b.discount) - optionalPrice(a.price, a.discount);
+        })
+    }
+
+    if (sortBy == 'sortByRating') {
+        result.sort((a, b) => {
+            return b.likes.length - a.likes.length;
+        })
+    }
+
+    if (sortBy == 'sortByAscDisc') {
+        result.sort((a, b) => {
+            return b.discount - a.discount;
+        })
+    }
+
+    if (sortBy == 'sortByDescDisc') {
+        result.sort((a, b) => {
+            return a.discount - b.discount;
+        })
+    }
+
+
     return result;
 
 }

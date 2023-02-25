@@ -322,13 +322,27 @@ body {
 }
 
 .main {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 30px;
-    background-color: rgb(248, 246, 246);
-    padding: 75px;
-    margin-top: 75px;
 
+    margin-top: 75px;
+    background-color: rgb(248, 246, 246);
+
+    &__products {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 30px;
+        padding: 75px;
+        padding-top: 40px;
+
+    }
+
+    &__sort {
+        display: flex;
+        padding-left: 75px;
+        padding-top: 10px;
+
+
+
+    }
 }
 
 .card {
@@ -533,8 +547,6 @@ body {
         }
     }
 }
-
-
 
 
 .allScreen {
@@ -751,69 +763,3 @@ body {
         }
     }
 }
-
-
-
-// @media (max-width: 768px) {
-//     .pageOfProduct {
-//         display: flex;
-//         min-height: 100vh;
-//         justify-content: space-evenly;
-//         flex-direction: column;
-//         margin-top: 80px;
-//         margin-left: 82px;
-//         margin-right: 82px;
-
-
-//         .imageInPageOfProduct {
-//             max-height: 300px;
-//             display: flex;
-//             align-items: center;
-
-//             img {
-//                 height: 200px;
-//                 width: 200px;
-//                 margin: auto;
-//             }
-//         }
-//     }
-
-//     .infoAboutProduct {
-
-
-//         h1 {
-//             font-size: medium;
-//         }
-
-
-//     }
-
-//     .infoAboutAuthorInPageOfProduct {
-//         align-items: center;
-//     }
-
-//     .oneReview {
-//         font-size: small;
-
-//     }
-// }
-
-
-
-/* БЭМ
-
-<div class="product-page">
-    <div class="product-page__image">
-        <img />
-    </div>
-    <div class="product-page__info">
-        <p class="product-page__info-paragraph"></p>
-        <p class="product-page__info-paragraph product-page__info-paragraph--yellow"></p>
-        <p class="product-page__info-paragraph product-page__info-paragraph--yellow"></p>
-        <p class="product-page__info-paragraph"></p>
-        <p class="product-page__info-paragraph"></p>
-    </div>
-    <div class="product-page__author"></div>
-</div>
-
-*/

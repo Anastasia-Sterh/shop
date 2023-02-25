@@ -6,10 +6,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { SignIn } from './components/SignIn';
+import { SignIn } from './pages/SignIn';
 import { Main } from './pages/Main';
 import { AboutMe } from './pages/AboutMe';
-import { SignUp } from './components/SignUp';
+import { SignUp } from './pages/SignUp';
 import { PageOfProduct } from './pages/PageOfProduct';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NotFound } from './pages/NotFound';

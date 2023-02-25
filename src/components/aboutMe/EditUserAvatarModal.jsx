@@ -1,5 +1,5 @@
 import { TextField, Button } from "@mui/material";
-import { editAvatar } from "../api";
+import { editAvatar } from "../../api";
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useMutation } from '@tanstack/react-query';

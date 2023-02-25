@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { getManyProducts } from "../api";
-import { CardInFavorites } from "../components/CardInFavorites";
+import { CardInFavorites } from "../components/favorites/CardInFavorites";
 
 
 export function Favorites() {
