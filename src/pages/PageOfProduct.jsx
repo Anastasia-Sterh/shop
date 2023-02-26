@@ -1,16 +1,19 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getOneProduct } from "../api";
 import { Button, CircularProgress, Paper } from "@mui/material";
 import { getReviewsOneProduct } from "../api";
-import { formatDate } from "../utils";
+import { formatDate, optionalPrice } from "../utils";
 import { StarsRating } from "../components/pageOfProducts/StarsRating";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Modal } from "../components/Modal";
 import { AddReview } from "../components/pageOfProducts/AddReview";
+import { useDispatch } from "react-redux";
+import { addInCart } from "../toolkit/slices/cartSlice";
 
 export function PageOfProduct() {
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [openModalReview, setOpenModalReview] = useState(false)
 
     let { productId } = useParams();
@@ -57,24 +60,31 @@ export function PageOfProduct() {
                 <div className="pageOfProduct__infoAboutProduct">
 
                     <h1>{oneProduct.name}</h1>
-                    <h3>{oneProduct.price} ₽</h3>
+                    <h3>   {oneProduct.discount == 0 ? (
+                        <> {oneProduct.price} ₽</>
+                    ) : (
+                        <>{optionalPrice(oneProduct.price, oneProduct.discount)} ₽
+                            <div className='price--old'> {oneProduct.price} ₽ </div>
+                        </>
+                    )}</h3>
                     <p>{oneProduct.wight}</p>
                     <p>{oneProduct.description}</p>
                 </div>
 
-                <div className="pageOfProduct__infoAboutAuthor">
+                <div className="pageOfProduct__infoAboutAuthor" style={{ cursor: 'pointer' }} onClick={() => { navigate(`/users/${oneProduct.author._id}`) }}>
                     <img src={oneProduct.author.avatar} alt='Avatar' />
                     {oneProduct.author.name}
                 </div>
             </div>
-            <div className="pageOfProduct__btn">
-                <Button size="small" variant="contained" color='secondary' onClick={() => { setOpenModalReview(true) }}> Оставить отзыв</Button>
+            <div className="pageOfProduct__btns">
+                <Button size="small" variant="contained" className="pageOfProduct__btns-btn" color='primary' onClick={() => { dispatch(addInCart(productId)) }}> В корзину</Button>
+                <Button size="small" variant="contained" className="pageOfProduct__btns-btn" color='secondary' onClick={() => { setOpenModalReview(true) }}> Оставить отзыв</Button>
             </div>
             <div className="pageOfProduct__reviews" >
                 {review.map(oneReview =>
                     <div className="pageOfProduct__reviews-oneReview" key={oneReview._id}>
                         <div className="pageOfProduct__reviews-oneReview-top">
-                            <div className="pageOfProduct__reviews-oneReview-leftOrRight">
+                            <div className="pageOfProduct__reviews-oneReview-leftOrRight" onClick={() => { navigate(`/users/${oneReview.author._id}`) }} style={{ cursor: 'pointer' }}>
                                 <img src={oneReview.author.avatar} alt='Avatar' />
                                 {oneReview.author.name}
                             </div>

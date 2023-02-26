@@ -25,10 +25,8 @@ export function CardInFavorites({ product }) {
                 <CloseIcon className='cart-card__icon' onClick={deleteOneProduct} />
                 <div className='cart-card__image' style={{ backgroundImage: `url(${product.pictures})` }} onClick={() => { navigate(`/product/${product._id}`) }}></div>
                 <span className='cart-card__name' onClick={() => { navigate(`/product/${product._id}`) }}>{product.name}</span>
-                <div className="cart-card__count">
-                </div>
-                <span className='cart-card__price'>{product.price} ₽</span>
-                <Button size="small" variant="contained" color='secondary' onClick={() => { dispatch(addInCart(product._id)) }} style={{ margin: '15px' }}>Добавить в корзину</Button>
+                <span className='cart-card__price'>{product.price}₽</span>
+                <Button size="small" variant="contained" color='secondary' className='cart-card__buttons' onClick={() => { dispatch(addInCart(product._id)) }} style={{ margin: '15px' }}>В корзину</Button>
             </Paper>
         </>
     )

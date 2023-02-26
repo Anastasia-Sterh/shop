@@ -32,7 +32,7 @@ export function AboutMe() {
 
     })
 
-    console.log(products)
+
 
     if (isLoading) {
         return <CircularProgress color="secondary" className="loader" />
@@ -73,6 +73,7 @@ export function AboutMe() {
 
             <h1>Мои продукты</h1>
             <div className="myProducts">
+
                 <div className="myProducts__add" onClick={() => { onAddProductClick(); }}>
                     <AddIcon style={{ fontSize: '80px', color: 'gray' }} />
 
