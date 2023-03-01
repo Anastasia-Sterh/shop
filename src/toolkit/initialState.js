@@ -1,14 +1,14 @@
 export const initialState = {
-    productsInCart: [],
-    search: {
-        search: '',
-    },
-    haveCheckbox: [],
-    favorites: []
-}
+  productsInCart: [],
+  search: {
+    search: "",
+  },
+  haveCheckbox: [],
+  favorites: [],
+};
 
 export const getInitialState = () => {
-    const productFromLS = window.localStorage.getItem('allState')
+  const productFromLS = window.localStorage.getItem("allState");
 
-    return productFromLS ? JSON.parse(productFromLS) : initialState;
-}
+  return productFromLS ? JSON.parse(productFromLS) : initialState;
+};

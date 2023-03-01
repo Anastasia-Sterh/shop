@@ -5,18 +5,17 @@ import { haveCheckboxReducer } from "./slices/haveCheckboxSlice";
 import { searchReducer } from "./slices/searchSlice";
 
 const mainReducer = combineReducers({
-    productsInCart: productsInCartReducer,
-    search: searchReducer,
-    haveCheckbox: haveCheckboxReducer,
-    favorites: favoritesReducer
-
-})
+  productsInCart: productsInCartReducer,
+  search: searchReducer,
+  haveCheckbox: haveCheckboxReducer,
+  favorites: favoritesReducer,
+});
 
 export const store = configureStore({
-    reducer: mainReducer,
-    devTools: true,
+  reducer: mainReducer,
+  devTools: true,
 });
 
 store.subscribe(() => {
-    window.localStorage.setItem('allState', JSON.stringify(store.getState()))
-})
+  window.localStorage.setItem("allState", JSON.stringify(store.getState()));
+});
