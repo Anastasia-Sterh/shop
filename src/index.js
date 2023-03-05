@@ -1,17 +1,83 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.scss";
+import App from "./App";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { SignIn } from "./pages/SignIn";
+import { Main } from "./pages/Main";
+import { AboutMe } from "./pages/AboutMe";
+import { SignUp } from "./pages/SignUp";
+import { PageOfProduct } from "./pages/PageOfProduct";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NotFound } from "./pages/NotFound";
+import { Cart } from "./pages/Cart";
+import { Provider } from "react-redux";
+import { store } from "./toolkit/store";
+import { Favorites } from "./pages/Favorites";
+import { AboutUser } from "./pages/AboutUser";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+
+      {
+        path: "/signin",
+        element: <SignIn />,
+      },
+
+      {
+        path: "/main",
+        element: <Main />,
+      },
+
+      {
+        path: "/aboutme",
+        element: <AboutMe />,
+      },
+
+      {
+        path: "/product/:productId",
+        element: <PageOfProduct />,
+      },
+
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+
+      {
+        path: "/favorites",
+        element: <Favorites />,
+      },
+
+      {
+        path: "/users/:userID",
+        element: <AboutUser />,
+      },
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
